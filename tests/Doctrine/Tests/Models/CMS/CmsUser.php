@@ -40,14 +40,14 @@ class CmsUser
      */
     public $address;
     /**
-     * @ManyToMany(targetEntity="CmsGroup", inversedBy="users", cascade={"persist"})
+     * @ManyToMany(targetEntity="CmsGroup", inversedBy="users", cascade={"persist", "merge"})
      * @JoinTable(name="cms_users_groups",
      *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="group_id", referencedColumnName="id")}
      *      )
      */
     public $groups;
-    
+
     public function __construct() {
         $this->phonenumbers = new ArrayCollection;
         $this->articles = new ArrayCollection;
@@ -107,9 +107,9 @@ class CmsUser
         }
         return false;
     }
-    
+
     public function getAddress() { return $this->address; }
-    
+
     public function setAddress(CmsAddress $address) {
         if ($this->address !== $address) {
             $this->address = $address;
