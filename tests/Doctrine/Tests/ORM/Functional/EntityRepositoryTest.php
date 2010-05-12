@@ -63,6 +63,17 @@ class EntityRepositoryTest extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $this->_em->clear();
 
+        $users = $repos->findBy(array('name' => array('Roman', 'Guilherme')));
+        $this->assertEquals(2, count($users));
+        $this->assertTrue($users[0] instanceof CmsUser);
+        $this->assertTrue($users[1] instanceof CmsUser);
+        $this->assertEquals('Roman', $users[0]->name);
+        $this->assertEquals('Guilherme', $users[1]->name);
+        $this->assertEquals('freak', $users[0]->status);
+        $this->assertEquals('dev', $users[1]->status);
+
+        $this->_em->clear();
+
         $users = $repos->findAll();
         $this->assertEquals(2, count($users));
 
